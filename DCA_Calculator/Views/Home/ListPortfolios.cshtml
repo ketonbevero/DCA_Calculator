@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DCA_Calculator.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "ListPortfolios";
+    int i = 1;
+}
+
+
+@if (Model == null)
+{
+    <h4>Nothing to show!</h4>
+}
+else
+{
+    @foreach (var portfolio in Model)
+    {
+        <button class="accordion accordion-radius">@Html.DisplayFor(p => portfolio.Name)</button>
+        <div class="panel">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        @if (portfolio.Bags.Count() == 0)
+                        {
+                            <p>There aren't any bag added yet.</p>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <thead>
+                                    <tr class="table-primary">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name of bag</th>
+                                        <th scope="col">Coin</th>
+                                        <th scope="col">FIAT</th>
+                                        <th scope="col">Details</th>
+                                        <th scope="col">Current value of bag</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in portfolio.Bags)
+                                    {
+                                        
+                                        <tr class="table-info">
+                                            <th scope="row">@(i++)</th>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CryptoCoin)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FIAT)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Show details", "ShowBag", new { uid = item.BagId })
+                                            </td>
+                                            <td>
+                                                5213213
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                    <div class="col">
+                        @Html.ActionLink("Add bag(s) to this portfolio", "ListBags") <br />
+                        @Html.ActionLink("Delete portfolio", "DeletePortfolio", new { uid = portfolio.PortfolioId }) <br />
+                        @Html.ActionLink("Edit portfolio", "EditPortfolio", new { uid = portfolio.PortfolioId })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

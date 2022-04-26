@@ -1,0 +1,82 @@
+﻿@model BagsAndPortfoliosViewModel 
+
+@{
+    ViewData["Title"] = "My DCA bags";
+}
+
+<h1>My DCA bags</h1>
+
+<p>
+    <a asp-action="AddDCA">Create new bag</a>
+</p>
+@if (Model == null)
+{
+    <h4>Nothing to show!</h4>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bags.First().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bags.First().CryptoCoin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bags.First().FIAT)
+                </th>
+                <th>
+                    Add bag to portfolio
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Bags)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CryptoCoin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FIAT)
+                    </td>
+                    <td>
+                        @if (Model.PortfolioNames != null)
+                        {
+                            if (item.PortfolioId == null)
+                            {
+                                using (Html.BeginForm("AddBagToPortfolio", "Home", FormMethod.Post))
+                                {
+                                    @Html.LabelFor(m => m.SelectedPortfolioId)
+                                    @Html.DropDownListFor(m => m.SelectedPortfolioId, Model.PortfolioNames)
+                                    <input type="hidden" name="SelectedBagId" value="@item.BagId"/>
+                                    <input type="submit" name="SaveButton" value="Add" />
+                                }
+                            }
+                            else
+                            {
+                                <p>This bag already included in a portfolio.</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>There aren't any portfolios available, @Html.ActionLink("create a new one!", "AddPortfolio")</p>
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditBag", new { uid = item.BagId }) |
+                        @Html.ActionLink("Show details", "ShowBag", new { uid = item.BagId }) |
+                        @Html.ActionLink("Close bag", "CloseBag", new { uid = item.BagId }, new { onclick = "return confirm('Are your sure?')" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

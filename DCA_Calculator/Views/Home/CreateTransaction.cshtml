@@ -1,0 +1,134 @@
+﻿ @model DCA_Calculator.Models.Transaction
+
+@{
+    DCA_Calculator.Models.DCABag bag = ViewData["selectedBag"] as DCA_Calculator.Models.DCABag;
+
+    var avgBuyData = ViewData["avgBuy"];
+    var tCount = ViewData["tCount"];
+
+    int i = 0;
+
+}
+
+<h1></h1>
+
+<h4>Add new transaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTransactionToBag" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="None" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CoinQuantity" class="control-label"></label>
+                <input asp-for="CoinQuantity" class="form-control" />
+                <span asp-validation-for="CoinQuantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalCost" class="control-label"></label>
+                <input asp-for="TotalCost" class="form-control" />
+                <span asp-validation-for="TotalCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="BagId" class="form-control" value=@bag.BagId />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn" style="background-color: darkmagenta; color: white; font-weight: 500;" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <canvas id="dcaChart" style="width:100%;max-width:700px"></canvas>
+    </div>
+</div>
+
+<div class="container" id="oneBagTransactions">
+    <div class="row" style="padding: 10px 5px 5px 5px; background-color: rgb(235, 234, 232)">
+        <div class="col">
+            <h5>
+                <strong>Bag:</strong>
+                <span style="color: darkmagenta;">@bag.Name</span>
+            </h5>
+        </div>
+        <div class="col">
+            <h5>
+                <strong>Crypto coin:</strong>
+                <span style="color: darkmagenta;">@bag.CryptoCoin</span>
+            </h5>
+        </div>
+        <div class="col">
+            <h5>
+                <strong>FIAT:</strong>
+                <span style="color: darkmagenta;">@bag.FIAT</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">
+                        Average buy @switch (bag.FIAT)
+                        {
+                            case Fiat.HUF:<span>Ft</span>
+                                break;
+                            case Fiat.Dollar: <span>$</span>
+                                break;
+                            case Fiat.Euro: <span>€</span>
+                                break;
+                            default:
+                                break;
+                        }
+                    </th>
+                    <th scope="col">
+                        Total cost @switch (bag.FIAT)
+                        {
+                            case Fiat.HUF:<span>(Ft)</span>
+                                break;
+                            case Fiat.Dollar: <span>$</span>
+                                break;
+                            case Fiat.Euro: <span>€</span>
+                                break;
+                            default:
+                                break;
+                        }
+                    </th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in bag.Transactions.OrderByDescending(d => d.Date))
+                {
+                    <tr>
+                        <th scope="row">@(++i)</th>
+                        <td>@Math.Round(item.CoinQuantity, 2)</td>
+                        <td>@Math.Round(item.AvgBuy, 2)</td>
+                        <td>@Math.Round(item.TotalCost, 2)</td>
+                        <td>@item.Date</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+            const ctx = document.getElementById('dcaChart');
+            const dcaChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: @tCount,
+                    datasets: [{
+                        data: @avgBuyData,
+                        label: 'avg buy price',
+                        backgroundColor: 'darkmagenta',
+                        borderColor: 'darkmagenta',
+                        fill: false
+                    }]
+                }
+            });
+</script>
+}

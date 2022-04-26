@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\DCA_Calculator.csproj": {}
+    "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\DCA_Calculator.csproj": {}
   },
   "projects": {
-    "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\DCA_Calculator.csproj": {
+    "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\DCA_Calculator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\DCA_Calculator.csproj",
+        "projectUniqueName": "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\DCA_Calculator.csproj",
         "projectName": "DCA_Calculator",
-        "projectPath": "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\DCA_Calculator.csproj",
+        "projectPath": "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\DCA_Calculator.csproj",
         "packagesPath": "C:\\Users\\dreampc\\.nuget\\packages\\",
-        "outputPath": "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\obj\\",
+        "outputPath": "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dreampc\\AppData\\Roaming\\NuGet\\NuGet.Config",

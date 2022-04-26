@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L6ld5ekXOHpO1JXKm37r6T7gglTrQvmurUZhZ+gRy0vEunYr2FyrCUw/OQBiEqFo9qSVZuxwQe7ZLc32w/m+sg==",
+  "dgSpecHash": "L17fKB+nfn6+BZFeWU/Cqxp4aQeJO2Ea0K2d0/ibSiXgDeX2bYCTQ/pCnFX8p/GJeQSwfbMMh84TQcttwrJE6w==",
   "success": true,
-  "projectFilePath": "G:\\ASP_féléves\\DCA_Calculator\\DCA_Calculator\\DCA_Calculator.csproj",
+  "projectFilePath": "G:\\ASP_féléves\\DCACalculator\\DCA_Calculator\\DCA_Calculator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dreampc\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\dreampc\\.nuget\\packages\\chart.js\\2.9.3\\chart.js.2.9.3.nupkg.sha512",
